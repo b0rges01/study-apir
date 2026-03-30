@@ -30,12 +30,9 @@ public class ProdutoController {
     @GetMapping("/{id}")    
     public ResponseEntity<Produto> findById(@PathVariable Long id) {        
         Optional<Produto> optProduto = mockup.findById(id);
-        if (optProduto.isPresent()) {   
-            return ResponseEntity.ok(optProduto.get());
-        }
-        else {
-            return ResponseEntity.notFound().build();
-        }
+        
+        return optProduto.map(p -> ResponseEntity.ok(p))
+            .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping    
