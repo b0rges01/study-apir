@@ -30,4 +30,9 @@ public class RepositoryProdutoMockup {
         .findFirst();
     }
 
+     public boolean deleteById (Long id) {
+        return produtos.removeIf(p -> p.getId().equals(id));
+    
+    }
+
 }
